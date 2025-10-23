@@ -126,7 +126,7 @@ async def stats(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(stats_text)
 
 def main():
-    app = Application.builder().token("8470212118:AAFUEkcC_mTV-484-ePKcN0uSfQ1YTNPsiQ").build()
+    app = Application.builder().token("Секретик").build()
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("stats", stats))
     app.add_handler(CallbackQueryHandler(handle_answer, pattern=r"^(?!download_results|restart_test|show_past_results)"))
