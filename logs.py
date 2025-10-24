@@ -47,17 +47,17 @@ def get_user_stats(user_id):
     avg_score = sum(log["score"] for log in user_logs) / total_tests if total_tests > 0 else 0
 
     stats_text = f"""
-📊 Ваша статистика:
+ Ваша статистика:
 
 Пройдено тестов: {total_tests}
-✅ Пройдено успешно: {passed_tests}
-❌ Не пройдено: {total_tests - passed_tests}
+ Пройдено успешно: {passed_tests}
+ Не пройдено: {total_tests - passed_tests}
 Средний балл: {avg_score:.2f}/50
     """
     
     stats_text += "\n📝 История тестов:\n"
     for log in user_logs:
-        status = "✅" if log["passed"] else "❌"
+        status = "+" if log["passed"] else "-"
         stats_text += f"{log['test_number']}. {log['timestamp']} — {log['score']}/{log['total']} {status}\n"
 
     return stats_text
@@ -71,6 +71,6 @@ def get_user_past_results(user_id):
 
     result_text = "Ваши прошлые попытки:\n\n"
     for log in user_logs:
-        status = "✅ Пройден" if log["passed"] else "❌ Не пройден"
-        result_text += f"📅 {log['timestamp']}\n📊 Результат: {log['score']}/{log['total']} — {status}\n\n"
+        status = "Пройден" if log["passed"] else "Не пройден"
+        result_text += f" {log['timestamp']}\n Результат: {log['score']}/{log['total']} — {status}\n\n"
     return result_text
