@@ -17,7 +17,7 @@ def load_questions():
                 raise ValueError(f"Вопрос {i+1} не имеет поля 'options'")
         return data["questions"]
     except Exception as e:
-        print(f"❌ Ошибка загрузки вопросов: {e}")
+        print(f" Ошибка загрузки вопросов: {e}")
         exit(1)
 
 questions = load_questions()
@@ -57,9 +57,9 @@ async def handle_answer(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     if selected_option == q["correct_answer"]:
         user_results[user_id]["score"] += 1
-        await query.edit_message_text(text=f"✅ Правильно! {q['question']}\nТвой ответ: {selected_option}")
+        await query.edit_message_text(text=f"Правильно! {q['question']}\nТвой ответ: {selected_option}")
     else:
-        await query.edit_message_text(text=f"❌ Неправильно!\nПравильный ответ: {q['correct_answer']}")
+        await query.edit_message_text(text=f"Неправильно!\nПравильный ответ: {q['correct_answer']}")
 
     current_q_index[user_id] += 1
 
@@ -78,13 +78,13 @@ async def show_results(message, user_id):
 🏁 Тест завершён!
 
 ✅ Правильных ответов: {score}/{total}
-{'🎉 Тест пройден!' if passed else '❌ Тест не пройден.'}
+{'🎉 Тест пройден!' if passed else 'Тест не пройден.'}
     """
 
     keyboard = [
-        [InlineKeyboardButton("📥 Скачать результаты", callback_data="download_results")],
-        [InlineKeyboardButton("🔄 Пройти снова", callback_data="restart_test")],
-        [InlineKeyboardButton("📋 Проверить прошлые попытки", callback_data="show_past_results")]
+        [InlineKeyboardButton("Скачать результаты", callback_data="download_results")],
+        [InlineKeyboardButton("Пройти снова", callback_data="restart_test")],
+        [InlineKeyboardButton("Проверить прошлые попытки", callback_data="show_past_results")]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
 
